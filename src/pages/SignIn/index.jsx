@@ -1,7 +1,4 @@
-import React,{useState} from 'react'
-import {Limiter,ContainerLogin,WrapLogin,LoginImage} from "styles/Utils";
-import { Input,Button } from 'zent';
-import { Jumbotron } from 'reactstrap';
+import React from 'react'
 
 export default function SignIn(){
     return(<>

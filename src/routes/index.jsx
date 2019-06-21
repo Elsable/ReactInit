@@ -9,6 +9,8 @@ import Home from 'pages/home'
 
 import SignIn from 'pages/SignIn'
 import SignUp from 'pages/SignUp'
+import Exam from 'pages/Exam'
+import ExamText from 'pages/Exam/ExamText'
 
 function NoMatch({ location }) {
     return (
@@ -29,8 +31,12 @@ export default function Routes(props) {
       <Router>
         
           <Switch>
-          <Route path="/" exact render={(props)=>(<Layout1><Home/></Layout1>)} /> 
-          
+          <Route path="/" exact render={(props)=>(<Layout1><Home {...props}/></Layout1>)} /> 
+          <Route path="/components" render={(props)=>(<Layout1><Home/></Layout1>)} /> 
+          <Route path={`/v1/:id`} render={props=> ( <Exam {...props} /> )}/>
+          <Route path={`/Examen`} render={props=> ( <Layout1><ExamText {...props} /> </Layout1>)}/>
+
+{/* // {console.log} */}
           <Route path="/SignIn" render={(props)=>(<Layout1><SignIn/></Layout1>)} />  
           <Route path="/SignUp" render={(props)=>(<Layout1><SignUp/></Layout1>)} />  
           

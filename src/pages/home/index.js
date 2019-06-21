@@ -1,8 +1,12 @@
 import React from 'react'
 import { Container } from '../../styles/Utils';
-
-export default function Home(){
+import HomeIndex from './components/index'
+export default function Home(match){
     return(
-        <Container>Home</Container>
+        <Container>
+            <div className="jumbotron container" >
+                <HomeIndex {...match}/>
+            </div>
+        </Container>
     )
 }

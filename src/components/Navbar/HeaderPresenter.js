@@ -1,7 +1,5 @@
 import React,{useState} from "react";
-import Store from "store";
 import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types';    
 
 import {
   Collapse,
@@ -10,22 +8,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
-
-const getUnseen = notifications => {
-  let unseen = [];
-  Object.keys(notifications).map(key => {
-    if (!notifications[key].seen) {
-      return unseen.push(notifications[key]);
-    }
-  });
-  return unseen.length;
-};
-
+  NavLink} from 'reactstrap';
 
     
 
@@ -38,8 +21,9 @@ function  HeaderPresenter(props){
 
     
   <>
-   <Navbar color="" style={{background:"#2f9e59"}} light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+   <Navbar  style={{background:"#341f97"}}  expand="md">
+   <Link to="/"><NavbarBrand ><img style={{width:150,height:32}} src='https://www.credifiel.com.mx/hs-fs/hubfs/WebSite/img/logo-blanco.png' alt="Logo" /></NavbarBrand>
+   </Link>
           {valor ? (
                   <NavbarToggler onClick={() => setValor(false)} />
 
@@ -53,28 +37,12 @@ function  HeaderPresenter(props){
           <Collapse isOpen={valor} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+              
+              <Link to="/SignIn"><NavLink>
+              Iniciar Sesión
+                </NavLink>
+                </Link>
               </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
