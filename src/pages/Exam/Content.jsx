@@ -3,14 +3,14 @@ import Preguntas from "Util/Preguntas";
 import { useLocalStorage } from "./../../Util/variables.js";
 import Swal from "sweetalert2";
 import { Card } from "zent";
-import { Radio, Input, Progress, Card as Card2, Icon } from "antd";
+import { Radio, Input, Progress } from "antd";
 import { Badge } from "reactstrap";
 
-const { Meta } = Card2;
 
 export default function Content(props) {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [Name] = useLocalStorage("FullName", "");
 
   useEffect(() => {
     let interval = null;
@@ -27,9 +27,8 @@ export default function Content(props) {
   return (
     <>
       <div className="container jumbotron">
-        {/* <Tooltip title="3 done / 3 in progress / 4 to do">
-      <Progress percent='40000'  successPercent={seconds} />
-    </Tooltip> */}
+        <h1 >
+        {Name}</h1>
         <div class="fixed-bottom">
           <Progress percent={(seconds * 100) / 5} className="fixed-top" />
         </div>
@@ -42,52 +41,33 @@ export default function Content(props) {
                 title={
                   <>
                     {" "}
+                    
                     <Badge color="info">{`Pregunta ` + (index + 1)}</Badge>
+                    <Badge color="info">{`Total de preguntas: ` + (Preguntas.Programacion.length)}</Badge>
                   </>
                 }
               >
-                <Card
-                  className="col-md-12"
-                  cover={
-                    <img
-                      alt="example"
-                      src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                    />
-                  }
-                  actions={[
-                    <Icon type="setting" />,
-                    <Icon type="edit" />,
-                    <Icon type="ellipsis" />
-                  ]}
-                >
-                  <Meta
-                    avatar={<img src={dato.image} alt="image" />}
-                    title={
-                      <>
-                        {" "}
-                        <h2>
-                          {index + 1}. {dato.Pregunta}
-                          <br />
-                        </h2>
-                      </>
-                    }
-                    description={
-                      <>
-                        {" "}
-                        <h2>
-                          <br /> {dato.Pregunta1}
-                        </h2>
-                        <h2>
-                          <br />
-                          <br />
+                <div className="row">
+                  <div class="card col-md-6">
+                    <img src={dato.image} class="card-img-top" alt="..." />
+                  </div>
 
-                          <Respuestas {...dato} />
-                        </h2>
-                      </>
-                    }
-                  />
-                </Card>
-                ,
+                  <div class="card col-md-6">
+                    <div class="card-body">
+                      <h1 class="card-title">
+                        {index + 1}. {dato.Pregunta} <br /> {dato.Pregunta1}
+                      </h1>
+                      <p class="card-text">
+                        {" "}
+                        <Respuestas {...dato} />
+                      </p>
+                      <a id={`${(index+1+1)}`} href={`#${(index+1+1)}`} class="btn btn-primary">
+                        Siguiente
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
                 <hr />
               </Card>
             </>
@@ -100,7 +80,6 @@ export default function Content(props) {
 }
 
 class Respuestas extends React.Component {
-
   state = {
     value: 1
   };
@@ -116,42 +95,34 @@ class Respuestas extends React.Component {
     const radioStyle = {
       display: "block",
       height: "30px",
-      lineHeight: "30px"
+      lineHeight: "30px",
+      ':hover': {
+        background: "red",
+        // cursor: "pointer"
+      }
     };
     return (
       <Radio.Group onChange={this.onChange} value={this.state.value}>
-        {/* {console.log(this.props.respuestas[0].a)} */}
-        {/* {this.props.respuestas.map((respuesta, index) => {
-                            return (
-                              <div key={index}>
-                                
-                                <div>{respuesta.a}
-                                xxx
-                                </div>
-
-                                <div>{respuesta.b} </div>
-                                <div>{respuesta.c} </div>
-                                <div>{respuesta.d} </div>
-                              </div>
-                            );
-                          })} */}
-
         <Radio style={radioStyle} value={1}>
-        {this.props.respuestas[0].a}
+          {this.props.respuestas[0].a}
         </Radio>
         <Radio style={radioStyle} value={2}>
-        {this.props.respuestas[1].b}
+          {this.props.respuestas[1].b}
         </Radio>
         <Radio style={radioStyle} value={3}>
-        {this.props.respuestas[2].c}
+          {this.props.respuestas[2].c}
         </Radio>
         <Radio style={radioStyle} value={4}>
-        {this.props.respuestas[3].d}
+          {this.props.respuestas[3].d}
         </Radio>
         <Radio style={radioStyle} value={5}>
-        {this.props.respuestas[4].e}
+          {this.props.respuestas[4].e}
         </Radio>
-        <Radio style={radioStyle} value={6}>
+        <Radio
+          style={radioStyle}
+
+          value={6}
+        >
           Escriba la respuesta...
           {this.state.value === 6 ? (
             <Input style={{ width: 100, marginLeft: 10 }} />

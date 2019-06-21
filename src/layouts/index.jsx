@@ -10,7 +10,6 @@ export default withRouter(function Layout(props) {
             <Body ruta={props.match.path}>            
             {props.children}
             </Body>
-        {/**   <Footer title= {Variables[0].title}/>*/}
         </>
     )
 });
