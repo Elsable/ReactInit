@@ -3,18 +3,20 @@ import Preguntas from "Util/Preguntas";
 import { useLocalStorage } from "./../../Util/variables.js";
 import Swal from "sweetalert2";
 import { Card } from "zent";
-import { Radio, Input, Progress } from "antd";
+import { Radio, Progress } from "antd";
 import { Badge } from "reactstrap";
 
 
 export default function Content(props) {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [Name] = useLocalStorage("FullName", "");
+  const[Datos,setDatos]=useLocalStorage({ExamenPrueba:[
+
+  ]})   
 
   useEffect(() => {
     let interval = null;
-    if (seconds === 5) {
+    if (seconds === 500) {
       Swal.fire("Tiempo Terminado!", "Buena Suerte!", "info");
     } else {
       interval = setInterval(() => {
@@ -28,22 +30,24 @@ export default function Content(props) {
     <>
       <div className="container jumbotron">
         <h1 >
-        {Name}</h1>
-        <div class="fixed-bottom">
-          <Progress percent={(seconds * 100) / 5} className="fixed-top" />
-        </div>
-
-        {Preguntas.Programacion.map((dato, index = 1) => {
+        {Datos.FullName}</h1>
+        {Datos.Examen==='Programación'?Preguntas.Programacion.map((dato, index = 1) => {
           return (
             <>
               <Card
                 className="col-md-12"
                 title={
                   <>
-                    {" "}
+                    <div className="row col-md-12">
+                      <div className="col-md-10">
+                      <Badge color="success">{`Pregunta ` + (index + 1)}</Badge>
+                      </div>
+                      <div className="col-md-2">
+                      <Badge  color="secondary">{`Total de preguntas: ` + (Preguntas.Programacion.length)}</Badge>
+
+                      </div>
+                    </div>
                     
-                    <Badge color="info">{`Pregunta ` + (index + 1)}</Badge>
-                    <Badge color="info">{`Total de preguntas: ` + (Preguntas.Programacion.length)}</Badge>
                   </>
                 }
               >
@@ -58,21 +62,24 @@ export default function Content(props) {
                         {index + 1}. {dato.Pregunta} <br /> {dato.Pregunta1}
                       </h1>
                       <p class="card-text">
-                        {" "}
-                        <Respuestas {...dato} />
+                        {" "}{dato.respuestas===undefined?null:<Respuestas {...dato} {...index} />}
                       </p>
-                      <a id={`${(index+1+1)}`} href={`#${(index+1+1)}`} class="btn btn-primary">
+                      <a  href={`#${(index+1+1)}`} class="btn btn-primary">
                         Siguiente
                       </a>
                     </div>
                   </div>
                 </div>
-
-                <hr />
+{/* // {console.log(dato)} */}
+                <hr id={`${(index+1+1)}`}/>
               </Card>
             </>
           );
-        })}
+        }):Datos.Examen==='Base de datos'?<>BDA</>:null}
+        <div class="fixed-bottom">
+          <Progress percent={(seconds * 100) / 500} className="fixed-top" />
+        </div>
+        
         {}
       </div>
     </>
@@ -85,7 +92,7 @@ class Respuestas extends React.Component {
   };
 
   onChange = e => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     this.setState({
       value: e.target.value
     });
@@ -102,7 +109,9 @@ class Respuestas extends React.Component {
       }
     };
     return (
-      <Radio.Group onChange={this.onChange} value={this.state.value}>
+      <Radio.Group key={this.props.index} onChange={this.onChange} value={this.state.value}>
+                  {this.props.respuestas[0].a}
+
         <Radio style={radioStyle} value={1}>
           {this.props.respuestas[0].a}
         </Radio>
@@ -117,16 +126,6 @@ class Respuestas extends React.Component {
         </Radio>
         <Radio style={radioStyle} value={5}>
           {this.props.respuestas[4].e}
-        </Radio>
-        <Radio
-          style={radioStyle}
-
-          value={6}
-        >
-          Escriba la respuesta...
-          {this.state.value === 6 ? (
-            <Input style={{ width: 100, marginLeft: 10 }} />
-          ) : null}
         </Radio>
       </Radio.Group>
     );

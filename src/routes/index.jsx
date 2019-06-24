@@ -33,7 +33,7 @@ export default function Routes(props) {
           <Switch>
           <Route path="/" exact render={(props)=>(<Layout1><Home {...props}/></Layout1>)} /> 
           <Route path="/components" render={(props)=>(<Layout1><Home/></Layout1>)} /> 
-          <Route path={`/v1/:id`} render={props=> ( <Exam {...props} /> )}/>
+          {/* <Route path={`/v1/:id`} render={props=> ( <Exam {...props} /> )}/> */}
           <Route path={`/Examen`} render={props=> ( <Layout1><ExamText {...props} /> </Layout1>)}/>
 
 {/* // {console.log} */}
