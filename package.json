@@ -10,6 +10,7 @@
     "graphql": "^14.3.0",
     "nginx": "0.0.0",
     "ngrok": "^3.2.1",
+    "nw": "^0.39.2",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-dom": "^16.8.6",
@@ -23,6 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start2": "build/index.html",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

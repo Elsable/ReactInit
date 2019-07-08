@@ -10,7 +10,7 @@ export default function TypeQuestion(props) {
         <div class="card col-md-12 jumbotron">
           <h2 className=""> {props.Pregunta}</h2>
           <hr />
-          <Answers {...props.respuestas} respuesta={props.respuesta} />
+          <Answers h1={props.respuestas} respuesta={props.respuesta} />
           <a href={`#${props.index + 1 + 1}`} class="btn btn-primary">
                 Siguiente
               </a>
@@ -18,7 +18,8 @@ export default function TypeQuestion(props) {
       ) : (
         <>
           <div class="card col-md-6">
-            <img src={props.image} class="card-img-top" alt="..." />
+          <img src={props.image} class="card-img-top" alt="..." />
+
           </div>
           <div class="card col-md-6">
             <div class="card-body">
@@ -26,8 +27,12 @@ export default function TypeQuestion(props) {
                 {props.index + 1}. {props.Pregunta} <br /> {props.Pregunta1}
               </h1>
               <p class="card-text">
-              {/* {JSON.stringify(props.respuestas)} */}
-                <Answers {...props.respuestas} respuesta={props.respuesta} />
+
+               {/* {console.log(props.respuestas)}  */}
+                <Answers h1={props.respuestas}   respuesta={props.respuesta} >
+                    {props.image1===""||props.image1===undefined?null:<img src={props.image1} class="card-img-top" alt="..." />}
+                
+                </Answers>
                 {/* {" "}{dato.respuestas===undefined?null:<Respuestas {...dato} {...index} />} */}
               </p>
               <a href={`#${props.index + 1 + 1}`} class="btn btn-primary">

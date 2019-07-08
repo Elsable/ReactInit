@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import Preguntas from "Util/Preguntas";
 import { useLocalStorage } from "./../../Util/variables.js";
 import Swal from "sweetalert2";
-import { Radio, Progress } from "antd";
+import {  Progress } from "antd";
 import Questions from "./Questions.jsx";
 import { Badge } from "reactstrap";
 
 
 export default function Content(props) {
   const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const[Datos,setDatos]=useLocalStorage({ExamenPrueba:[
+  const [isActive] = useState(false);
+  
+  
+  const[Datos]=useLocalStorage({ExamenPrueba:[
 
   ]})   
-
   useEffect(() => {
     let interval = null;
     if (seconds === 500) {

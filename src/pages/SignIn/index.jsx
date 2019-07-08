@@ -2,69 +2,43 @@ import React from 'react'
 import { Form, Icon, Input, Button } from 'antd';
 
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
   
-  
-class HorizontalLoginForm extends React.Component {
-    componentDidMount() {
-      // To disabled submit button at the beginning.
-      this.props.form.validateFields();
-    }
-  
-    handleSubmit = e => {
-      e.preventDefault();
-      this.props.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-        }
-      });
-    };
-  
+export default  class SignIn extends React.Component {
+   
     render() {
-      const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-  
-      // Only show error after a field is touched.
-      const usernameError = isFieldTouched('username') && getFieldError('username');
-      const passwordError = isFieldTouched('password') && getFieldError('password');
+    
       return (
-          
-        <Form layout="inline" onSubmit={this.handleSubmit}>
-          <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-            {getFieldDecorator('username', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(
+          <div className="container jumbotron "><center>
+            <div className="col-md-3"></div>
+            <div className="col-md-6">
+        <h2 className="display-3 " >Iniciar sesión</h2>
+
+          <Form.Item >
+
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Username"
-              />,
-            )}
+              />
           </Form.Item>
-          <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
+          <Form.Item>
+            
               <Input
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 placeholder="Password"
-              />,
-            )}
+              />
+            
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+            <Button type="primary" htmlType="submit">
               Log in
             </Button>
           </Form.Item>
-        </Form>
+
+            </div>
+            <div className="col-md-3"></div>
+        </center>
+        </div>
       );
     }
-  }
-  
-  const WrappedHorizontalLoginForm = Form.create({ name: '' })(HorizontalLoginForm);
-
-  export default function SignIn(){
-   
-          return(<WrappedHorizontalLoginForm/>)
   }
