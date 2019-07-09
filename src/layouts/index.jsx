@@ -1,9 +1,9 @@
-import React from 'react'
+import React,{memo} from 'react'
 import Body from './Body';
 import {withRouter} from 'react-router-dom'
 import Header from './Header';
 
-export default withRouter(function Layout(props) {
+export default memo(withRouter(function Layout(props) {
     return(
         <>
         <Header/>
@@ -12,4 +12,4 @@ export default withRouter(function Layout(props) {
             </Body>
         </>
     )
-});
+}));

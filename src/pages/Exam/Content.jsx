@@ -35,7 +35,7 @@ export default function Content(props) {
         {Datos.Examen==='Programación'?Preguntas.Programacion.map((dato, index = 1) => {
           return (
             <>
-            <Questions {...dato} index={index}>
+            <Questions pregunta={props.pregunta} {...dato} index={index}>
             <div className="row col-md-12">
                       <div className="col-md-10">
                        <Badge color="success">{`Pregunta ` + (index + 1)}</Badge>

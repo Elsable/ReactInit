@@ -1,48 +1,52 @@
-import React,{useState} from "react";
-import { Radio,Input } from "antd";
+import React, {memo, useState } from "react";
+import { Radio } from "antd";
 import { useLocalStorage } from "./../../Util/variables.js";
 
-export default function Answers(props) {
+export default memo(function Answers(props) {
   return (
     <>
   
       {props ? <Respuestas {...props} /> : null}
-      {/* {props.children.map(s=>{
-        alert(s)
-      })}   */}
     </>
   );
-}
- function Respuestas (props){
-  const[Datos,setDatos]=useLocalStorage({ExamenPrueba:[
+})
+function Respuestas(props) {
+  // const[Datos,setDatos]=useLocalStorage({FullName:'',Birthday:''})   
 
-  ]})   
-  
-  const [value] = useState(1);
+  const [Examen, setExamen] = useLocalStorage({ExamenPrueba:[]});
+  // const [Datos, setDatos] = useLocalStorage({ ExamenPrueba: [] });
 
+  const [value, setState] = useState(1);
 
+  return (
+    <>
+      {props.h1 === undefined ? null : (
+        <>
+          {props.h1.map((dato, index) => (
+            // <Radio.Group onChange={(e)=>setDatos({...Datos,ExamenPrueba:[...Datos.ExamenPrueba,{index:e.target.value}]})} value={Datos.ExamenPrueba[index]} ></Radio.Group>
+            // <Radio.Group onChange={e => setState(e.target.value)} value={value}>
+            // <Radio.Group onChange={e => setDatos({...Datos,ExamenPrueba:[...Datos.ExamenPrueba,{index:e.target.value}]})} value={Datos.ExamenPrueba[index]}>
+            <Radio.Group onChange={e => {setState(e.target.value)
+//  setDatos({...Datos,ExamenPrueba:[...Datos.ExamenPrueba,[{["Pregunta"+props.pregunta]:e.target.value}]]})
+             
+            setExamen({...Examen,ExamenPrueba:[{["Pregunta"+props.pregunta]:e.target.value}]})
+            }} value={value}>
 
-    return (
-      <>
-        {(props.h1===undefined?null:<>
-          {props.h1.map((dato,index)=>
-    <Radio.Group onChange={(e)=>setDatos({...Datos,ExamenPrueba:[...Datos.ExamenPrueba,{index:e.target.value}]})} value={Datos.ExamenPrueba[index]} >
-    {props.h1[0].a === "" ||props.h1[0].a === undefined? null : (
-      <Radio  value={index}>
-        {props.h1[index].a?props.h1[index].a:null}
-        {props.h1[index].b?props.h1[index].b:null}
-        {props.h1[index].c?props.h1[index].c:null}
-        {props.h1[index].d?props.h1[index].d:null}
-        {props.h1[index].e?props.h1[index].e:null}
-        
-      </Radio>
-    )}
-  </Radio.Group>
-    
-    )}
-          </>
-          )}
-  {/* {(props.h1===undefined?null:
+              {/* // <Radio.Group onChange={e => setState(e.target.value)} value={value}> */}
+            {props.h1[0].a === "" || props.h1[0].a === undefined ? null : (
+                <Radio value={index}>
+                  {props.h1[index].a ? props.h1[index].a : null}
+                  {props.h1[index].b ? props.h1[index].b : null}
+                  {props.h1[index].c ? props.h1[index].c : null}
+                  {props.h1[index].d ? props.h1[index].d : null}
+                  {props.h1[index].e ? props.h1[index].e : null}
+                </Radio>
+              )}
+            </Radio.Group>
+          ))}
+        </>
+      )}
+      {/* {(props.h1===undefined?null:
      
         props.h1[0]?
         // setDatos({...Datos,Examen:examen.title}
@@ -78,7 +82,6 @@ export default function Answers(props) {
             :props.respuesta===""?
             <><Input placeholder="Ingrese su respuesta" /></>
             :null)} */}
-        
-            </>
-    )}
-            
+    </>
+  );
+}

@@ -10,7 +10,7 @@ export default function TypeQuestion(props) {
         <div class="card col-md-12 jumbotron">
           <h2 className=""> {props.Pregunta}</h2>
           <hr />
-          <Answers h1={props.respuestas} respuesta={props.respuesta} />
+          <Answers h1={props.respuestas}   pregunta={props.index+1} respuesta={props.respuesta} />
           <a href={`#${props.index + 1 + 1}`} class="btn btn-primary">
                 Siguiente
               </a>
@@ -29,7 +29,7 @@ export default function TypeQuestion(props) {
               <p class="card-text">
 
                {/* {console.log(props.respuestas)}  */}
-                <Answers h1={props.respuestas}   respuesta={props.respuesta} >
+                <Answers h1={props.respuestas}   pregunta={props.index+1} respuesta={props.respuesta} >
                     {props.image1===""||props.image1===undefined?null:<img src={props.image1} class="card-img-top" alt="..." />}
                 
                 </Answers>

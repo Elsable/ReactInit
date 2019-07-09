@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo} from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,7 +9,6 @@ import Home from 'pages/home'
 
 import SignIn from 'pages/SignIn'
 import SignUp from 'pages/SignUp'
-import Exam from 'pages/Exam'
 import ExamText from 'pages/Exam/ExamText'
 
 function NoMatch({ location }) {
@@ -26,7 +25,7 @@ function NoMatch({ location }) {
 
 
   
-export default function Routes(props) {
+export default memo(function Routes(props) {
     return (
       <Router>
         
@@ -47,4 +46,4 @@ export default function Routes(props) {
         
       </Router>
     );
-  }
+  })

@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment,memo } from "react";
 import styled from "styled-components";
 const Contenido = styled.div`
   padding-top: 0px;
 `;
 
-export default function Body(props) {
+export default memo(function Body(props) {
   return (
     <Fragment>
       <Contenido>{props.children}</Contenido>
     </Fragment>
   );
-}
+})
